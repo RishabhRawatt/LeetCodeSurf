@@ -26,10 +26,12 @@ public:
             return root;
         }
         
+        //if root is bigger than high then traverse left(smaller range)
         else if(root->val > high){
             return trimBST(root->left,low,high);
         }
         
+        //if root val is less than low then traverse in right(bigger range)
         else if(root->val < low){
             
             return trimBST(root->right,low,high);
