@@ -6,42 +6,35 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-    public:   
-    int t[1001][1001];
-    
-    Solution()
-    {
-        
-        memset(t,-1,sizeof(t));
-        
-    }
+    public:
+   
+    //Function to return max value that can be put in knapsack of capacity W.
     int knapSack(int W, int wt[], int val[], int n) 
     { 
-        //dp array
-       
-       
-       //base case
-       
-       if(n==0 || W==0)
-       return 0;
-       
-       if(wt[n-1] <= W){
-           
-           if(t[n][W] != -1)
-                return t[n][W];
-            
-           else
-                return t[n][W]=max ( val[n-1]+knapSack(W-wt[n-1],wt,val,n-1),knapSack(W,wt,val,n-1));
+       // for base case 
+       // n & W ==0
+       int dp[n+1][W+1];
+       for(int i=0;i<n+1;i++){
+           for(int j=0;j<W+1;j++){
+               if(i==0 || j==0)
+                dp[i][j]=0;
+           }
        }
        
-       else if(wt[n-1] >W){
-           
-            if(t[n][W] != -1)
-                return t[n][W];
-            
-           else  
-                return t[n][W]=knapSack(W,wt,val,n-1);
+       for(int i=1;i<n+1;i++){
+           for(int j=1;j<W+1;j++){
+               
+               if(wt[i-1] <= j){
+                   //if less than bag size
+                             //   val wt     reduce bag wt       reduce n
+                   dp[i][j]= max( val[i-1] + dp[i-1][j-wt[i-1]] , dp[i-1][j]);
+               }
+               else
+                         // reduce n
+                dp[i][j]=dp[i-1][j];
+           }
        }
+       return dp[n][W];
     }
 };
 
