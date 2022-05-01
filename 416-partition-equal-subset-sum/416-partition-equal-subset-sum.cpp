@@ -19,10 +19,8 @@ public:
         
          for(int i=1;i<n+1;i++){
             for(int j=1;j<sum+1;j++){
-                if(nums[i-1] == j) t[i][j]=true;
-                
-                else if(nums[i-1]<j)
-                    t[i][j]=t[i-1][j-nums[i-1]] or t[i-1][j];
+                if(nums[i-1] <= j)                 
+                 t[i][j]=t[i-1][j-nums[i-1]] or t[i-1][j];
                 else
                     t[i][j]=t[i-1][j];
             }
