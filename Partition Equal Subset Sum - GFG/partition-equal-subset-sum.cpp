@@ -13,12 +13,14 @@ public:
     
     int subsetsum(int sum,int N,int arr[]){
     
+    // if N become -1 means all array element finish 
+    // and dum become 0
         if(N == -1){
             if(sum == 0)
                 return 1;
             return 0;
         }
-        
+        // if sum get negative
         if(sum < 0){
             return 0;
         }
@@ -26,6 +28,7 @@ public:
             return 1;
         if(t[N][sum] != -1) return t[N][sum];
         
+        // pick no pick
         return t[N][sum]= subsetsum(sum-arr[N],N-1,arr) || subsetsum(sum,N-1,arr);
          
         
@@ -45,6 +48,7 @@ public:
             return false;
             
          else if(sum %2 ==0) {
+             // N-1 because size -1 index
             return subsetsum(sum/2,N-1,arr);
          }
     //return 0;
