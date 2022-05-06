@@ -9,37 +9,25 @@ using namespace std;
 
 class Solution{
 public:
-
+    int t[1001][1001];
+    
     int subsetsum(int sum,int N,int arr[]){
     
-    
-        int t[N+1][sum+1];
-        
-        //initlize dp
-        for(int i=0;i<N+1;i++){
-            for(int j=0;j<sum+1;j++){
-                
-                if(i==0)
-                    t[i][j]=false;
-                else if(j==0)
-                    t[i][j]=true;
-            }
+        if(N == -1){
+            if(sum == 0)
+                return 1;
+            return 0;
         }
         
-        for(int i=1;i<N+1;i++){
-            for(int j=1;j<sum+1;j++){
-                
-                if(arr[i-1]<=j){
-                    
-                    t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
-                }
-                else
-                    t[i][j]=t[i-1][j];
-            }
+        if(sum < 0){
+            return 0;
         }
-        return t[N][sum];
+        if(sum == 0)
+            return 1;
+        if(t[N][sum] != -1) return t[N][sum];
         
-        
+        return t[N][sum]= subsetsum(sum-arr[N],N-1,arr) || subsetsum(sum,N-1,arr);
+         
         
     }
     
@@ -51,11 +39,13 @@ public:
             sum=sum+arr[i];
         }
         
+        t[N][sum];
+        memset(t,-1,sizeof(t));
         if(sum % 2 != 0)
             return false;
             
          else if(sum %2 ==0) {
-            return subsetsum(sum/2,N,arr);
+            return subsetsum(sum/2,N-1,arr);
          }
     //return 0;
             
