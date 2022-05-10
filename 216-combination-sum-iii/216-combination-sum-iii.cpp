@@ -6,6 +6,7 @@ public:
     
     void helper(int index, int sum,int n ,int k){
         
+        //base case when sum become n and all elements k slot fill
     if(sum ==n && k==0){
         
         ans2.push_back(ans);
@@ -15,6 +16,7 @@ public:
         if(sum > n){
             return;
         }
+        //we using index so we cant repeat same number twice so index must increase
         for(int i=index;i<=9;i++){
             if(i>n)
                 break;
