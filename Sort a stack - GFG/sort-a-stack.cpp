@@ -52,7 +52,7 @@ you are required to complete the below method */
 
 void insert(int val ,stack<int> &s){
     
-    //base
+    //base dont forget to return 
     if(s.empty() || s.top() <= val){
         s.push(val);
         return;
