@@ -13,8 +13,7 @@ public:
             return;
         }
         
-        string op1=output;
-        string op2=output;
+       
         
         //if it it an integer so dont recurse just skip 
         if(isdigit(input[0])){
@@ -26,9 +25,13 @@ public:
         }
         
         
-        //two outputs 1 upper 1 lower
+        
         
         else{
+            
+        //two outputs 1 upper 1 lower
+         string op1=output;
+         string op2=output;
         op1.push_back(toupper(input[0]));
         op2.push_back(tolower(input[0]));
         
@@ -44,10 +47,6 @@ public:
         
         string input=s;
         string output="";
-        
-        // output.push_back(input[0]);
-        // input.erase(input.begin()+0);
-        
         
         solver(input,output);
         return ans;
