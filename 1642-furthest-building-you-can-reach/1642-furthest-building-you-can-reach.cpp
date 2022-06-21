@@ -22,7 +22,7 @@ public:
             bricks =bricks-diff;
             maxBricks.push(diff);
                 
-            //if brick finished then just replace max brick use with ladder
+            //if brick become negative then just replace max brick use with ladder
             if(bricks < 0){
                     bricks +=maxBricks.top();
                     maxBricks.pop();
