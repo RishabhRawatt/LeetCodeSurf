@@ -4,7 +4,8 @@ public:
         
         unordered_map<char,int> freq;
         
-       for(char c:s){
+        // by &c we gave the refrence of char so we can get index 
+       for(char &c:s){
            freq[c]++;
        }
         
