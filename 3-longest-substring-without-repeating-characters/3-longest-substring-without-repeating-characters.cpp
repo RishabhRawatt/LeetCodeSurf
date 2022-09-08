@@ -1,17 +1,23 @@
 class Solution {
-public:        
-    int lengthOfLongestSubstring(string s) {        
-        unordered_map<char, int> freq;        
-        int n = s.length(), st = 0, end = 0, ans = 0;		
-        while(end < n){            
-            freq[s[end]]++;            
-            while(freq[s[end]] != 1){
-                freq[s[st]]--;
-                st++;
-            }            
-            ans = max(ans, end - st + 1);
-            end++;                   
-        }        
-        return ans;        
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        vector<int>mpp(256,-1);
+        
+        int left=0;
+        int right=0;
+        int length=0;
+        
+        while(right < s.length()) { 
+            
+            if(mpp[s[right]] != -1)
+                //if index is less than left no need to move left
+                left=max(left,mpp[s[right]]+1);
+            
+            mpp[s[right]]=right;
+            length=max(length,right-left+1);
+            right++;
+        }
+        return length;
     }
 };
