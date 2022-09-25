@@ -2,16 +2,14 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         
-        // we have to move each element by kth step
+        //reverse first size-k
+        k%=nums.size();
+        if(k==0)
+            return;
         
-        vector<int> temp(nums.begin(),nums.end());
-        
-        for(int i=0;i<nums.size();i++){
-            
-            nums[(i+k)%nums.size()]=temp[i];
-            
-        }
-        
+        reverse(nums.begin(),nums.end()-k);
+        reverse(nums.end()-k,nums.end());
+        reverse(nums.begin(),nums.end());
         
     }
 };
