@@ -1,31 +1,24 @@
 class Solution {
 public:
     
-    void recur(int index,vector<int> &nums, set<vector<int>>&ans){
         
-        if(index==nums.size()){
-            ans.insert(nums);
-            
-            return;
+    void backtrack(vector<int> nums, int idx,vector<vector<int>> &res ){
+        if(idx == nums.size()){
+            res.push_back(nums);
         }
-        
-        for(int i=index;i<nums.size();i++){
-            
-            swap(nums[index],nums[i]);
-            recur(index+1,nums,ans);
-            swap(nums[index],nums[i]);
+        for(int j = idx; j < nums.size(); j++){
+            if(idx == j || nums[idx] != nums[j]){
+                swap(nums[idx], nums[j]);
+                backtrack(nums, idx+1, res);
+            }
         }
-        
     }
     
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-    
-        set<vector<int>> ans;
         
-        recur(0,nums,ans);
-        
-        vector<vector<int>>result(ans.begin(),ans.end());
-        return result;
-        
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        backtrack(nums, 0, res);
+        return res;
     }
 };
