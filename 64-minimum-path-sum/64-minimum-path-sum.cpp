@@ -1,6 +1,8 @@
 class Solution {
 public:
     
+    //space optimized
+    
     int minPathSum(vector<vector<int>>& grid) {
     
         int n=grid.size();
@@ -8,24 +10,29 @@ public:
         
         vector<vector<int>> dp(n,vector<int>(m,0));
         
+        vector<int> prev(n,0);
+        
         for(int i=0;i<n;i++){
+            
+            vector<int> curr(m,0);
             for(int j=0;j<m;j++){
                 if(i==0 && j==0)
-                    dp[i][j]=grid[i][j];
+                    curr[j]=grid[i][j];
                 else{
                     int up=grid[i][j];
-                    if(i>0) up += dp[i-1][j];
+                    if(i>0) up += prev[j];
                     else up+=1e9;
                     
                     int left=grid[i][j];
-                    if(j>0) left+= dp[i][j-1];
+                    if(j>0) left+= curr[j-1];
                     else left+=1e9;
                     
-                    dp[i][j]=min(left,up);
+                    curr[j]=min(left,up);
                 }
             }
+            prev=curr;
         }
-                return dp[n-1][m-1];
+                return prev[m-1];
         
     }
 };
