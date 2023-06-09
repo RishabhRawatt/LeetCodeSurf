@@ -6,17 +6,20 @@ public:
         
         int count=0;
         
-        for(int i=0;i<r;i++){
+        int i=r-1,j=0;
+        
+        
+        while(i>=0 && j<c){
             
-            for(int j=0;j<c;j++){
-            
-                if(grid[i][j]<0){
-                    count+=c-j;
-                    break;
-                }
-            
+            if(grid[i][j]<0){
+                count+=c-j;
+                i--;
+            }
+            else{
+                j++;
             }
         }
+      
         return count;
     }
 };
