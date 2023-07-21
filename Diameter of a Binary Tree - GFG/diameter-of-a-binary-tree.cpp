@@ -90,16 +90,16 @@ struct Node
         left = right = NULL;
     }
 }; */
-int maxd=INT_MIN;
 
-int solve(Node * root){
+
+int solve(Node * root,int &maxd){
     
     //base case
     if(!root) return 0;
     
     //left side
-    int left=solve(root->left);
-    int right=solve(root->right);
+    int left=solve(root->left,maxd);
+    int right=solve(root->right,maxd);
     
     // max diameter
     maxd=max(maxd,left+right+1);
@@ -111,8 +111,8 @@ class Solution {
   public:
     // Function to return the diameter of a Binary Tree.
     int diameter(Node* root) {
-        maxd=INT_MIN;
-        solve(root);
+        int maxd=INT_MIN;
+        solve(root,maxd);
         return maxd;
     }
 };
