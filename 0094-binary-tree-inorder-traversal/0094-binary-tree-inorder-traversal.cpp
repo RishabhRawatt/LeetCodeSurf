@@ -18,20 +18,23 @@ public:
         vector<int>inorder;
         stack<TreeNode*>st;
         
-        while(true){
-            
-            if(root!=NULL){
-                st.push(root);
-                root=root->left;
-            }
-            else{
-                if(st.empty()==true)break;
-                root=st.top();
-                inorder.push_back(root->val);
-                st.pop();
-                root=root->right;
-            }
+        if(root==NULL){
+        return inorder;
         }
+        
+       while(root!=NULL || !st.empty()){
+    if(root!=NULL){
+        st.push(root);
+        root=root->left;
+    }
+    else{
+        root=st.top();
+        inorder.push_back(root->val);
+        st.pop();
+        root=root->right;
+    }
+}
+            
         return inorder;
     }
 };
