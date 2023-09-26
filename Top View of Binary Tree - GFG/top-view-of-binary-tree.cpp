@@ -102,35 +102,49 @@ class Solution
     public:
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
-    vector <int> topView(Node *root)
+    vector<int> topView(Node *root)
     {
-       queue<pair<Node*,int>>q;
-       map<int,int>m;
-       
-       //base case
-       if(!root) return {0};
-       //push root to queue at starting
-       q.push({root,0});
-       
-       while(!q.empty()){
-           
-          Node * t = q.front().first;
-          int height = q.front().second;
-          q.pop();
-          
-          if(!m[height]) m[height]=t->data;
-          //for left height will decrease -1
-          if(t->left) q.push({t->left,height-1});
-          //for right height will increase +1
-          if(t->right) q.push({t->right,height+1});
-       }
-       //now just store in vector
-       
-       vector<int> ans;
-       for(auto x:m){
-           ans.push_back(x.second);
-       }
-       return ans;
+        vector<int>ans;
+    
+        if(root==NULL)return ans;
+        
+        //make queue and map    
+        queue<pair<Node * ,int>>q;
+        map<int,int>mp;
+        
+        //add first element
+        q.push({root,0});
+        
+        while(!q.empty()){
+            
+            //take from queue
+            auto it= q.front();
+            q.pop();
+            
+            //split queue data
+            Node * tempnode=it.first;
+            int index=it.second;
+            
+            //check in mp if already node present in index dont put 
+            //this line means ni mila
+            if(mp.find(index)==mp.end())
+                mp[index]=tempnode->data;
+                
+            //now traverse left
+            if(tempnode->left !=NULL)
+                q.push({tempnode->left,index-1});
+            
+            //traverse right
+            if(tempnode->right !=NULL)
+            q.push({tempnode->right,index+1});
+            
+        }
+        
+        //now transfer map to vector
+        for(auto it:mp){
+            ans.push_back(it.second);
+        }
+        return ans;
     }
 
 };
