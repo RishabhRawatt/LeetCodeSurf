@@ -39,7 +39,7 @@ public:
             //loop as it in level order
             for(int i=0;i<size;i++){
                 //now to solve overflow values fix id
-                int currId=q.front().second-mmin;
+                long currId=q.front().second-mmin;
                 //take node from queue and then pop
                 TreeNode * temp=q.front().first;
                 q.pop();
@@ -49,8 +49,8 @@ public:
                 if(i==size-1) last=currId;
                 
                 //traverse left and right if not null and pass index as in formula
-                if(temp->left) q.push({temp->left,(long long)currId*2+1});
-                if(temp->right) q.push({temp->right,(long long)currId*2+2});
+                if(temp->left) q.push({temp->left,currId*2+1});
+                if(temp->right) q.push({temp->right,currId*2+2});
                 
             }
             //calculate that level width 
