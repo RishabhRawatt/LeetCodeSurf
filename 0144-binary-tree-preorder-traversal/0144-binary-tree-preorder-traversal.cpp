@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    // by morris traverse
     vector<int> preorderTraversal(TreeNode* root) {
         
         vector<int> preOrder;
