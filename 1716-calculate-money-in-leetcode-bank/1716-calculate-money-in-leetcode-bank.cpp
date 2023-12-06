@@ -1,30 +1,19 @@
 class Solution {
 public:
     int totalMoney(int n) {
+        int terms=n/7;
+        int first =28;
+        int last =first+(terms-1)*7;
+        int total= terms*(first+last)/2;
         
-        int full=ceil(n/7);
-        int leftover=full+1;
-        int rem=n%7;
-        
-        int total=0;
-        
-        if(n<8) return n*(n+1)/2;
-        else{
-        
-        int i=0;
-        while(full>0){
-        total+=28+(7*i);
-            full--;
-            i++;
+        if(n%7){
+            int extra=terms+1;
+            for(int i=0;i<(n%7);i++){
+                total+=extra;
+                extra++;
+            }
         }
         
-        
-        while(rem>0){
-            total+=leftover;
-            leftover++;
-            rem--;
-        }
         return total;
-        }
     }
 };
