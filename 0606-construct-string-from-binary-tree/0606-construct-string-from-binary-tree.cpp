@@ -11,23 +11,33 @@
  */
 class Solution {
 public:
-    string tree2str(TreeNode* root) {
+    
+    void preorder(TreeNode * root , string &s){
         
-        string s="";
-      
+        if(!root) return;
+        
         s+=to_string(root->val);
         
-        if(root->left){
-           s+="("+tree2str(root->left)+")";
-        }
+        // no left no right
+        if(!root->left && !root->right) return;
         
-        if(root->right){
-            //check if left not present add ()
-            if(root->left ==NULL) s+="()";
-          s+="("+tree2str(root->right)+")";
-        }
+        //for left
+        //we didnt check for left as we did in right because we have to put () if no left
+        s.push_back('(');
+        preorder(root->left,s);
+        s.push_back(')');
         
-        return s;
-            
+        //for right
+        if(root->right) s.push_back('(');
+        preorder(root->right,s);
+       if(root->right) s.push_back(')');
+    
+    }
+    
+    
+    string tree2str(TreeNode* root) {
+        string ans;
+        preorder(root,ans);
+        return ans;
     }
 };
