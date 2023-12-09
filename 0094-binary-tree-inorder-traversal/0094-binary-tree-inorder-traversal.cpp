@@ -11,30 +11,38 @@
  */
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
+    // by morris traverse S.C  O(1)
+    
+       vector<int> inorderTraversal(TreeNode* root) {
         
-        //by iterative method
+        vector<int> inorder;
+        TreeNode * curr=root;
         
-        vector<int>inorder;
-        stack<TreeNode*>st;
-        
-        if(root==NULL){
-        return inorder;
+        while(curr !=NULL){
+            //case 1
+            if(curr->left == NULL){
+                inorder.push_back(curr->val);
+                curr=curr->right;
+            }
+            //case 2
+            else{
+                TreeNode * prev=curr->left;
+                while(prev->right && prev->right != curr){
+                    prev=prev->right;
+                }
+                //add thread
+                if(prev->right==NULL){
+                    prev->right=curr;
+                    curr=curr->left;
+                }
+                //remove thread
+                else{
+                    prev->right=NULL;
+                    inorder.push_back(curr->val);
+                    curr=curr->right;
+                }
+            }
         }
-        
-       while(root!=NULL || !st.empty()){
-    if(root!=NULL){
-        st.push(root);
-        root=root->left;
-    }
-    else{
-        root=st.top();
-        inorder.push_back(root->val);
-        st.pop();
-        root=root->right;
-    }
-}
-            
         return inorder;
     }
 };
