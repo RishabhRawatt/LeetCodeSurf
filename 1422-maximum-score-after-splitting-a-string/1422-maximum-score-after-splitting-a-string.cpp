@@ -1,34 +1,35 @@
 class Solution {
 public:
-    
-    //two pass approch 
-    //O(N+N)
+        
+    //one pass approach 
+    // we can se that
+    // score = zeroLeft + oneRight  -------- eq (1)
+    // OneTotal = OneLeft - OneRight
+    // OneRight = OneTotal - OneLeft -------  eq (2) put this in eq 1
+    // Score = zeroLeft + (OneTotal - OneLeft)
+    // Score = zeroLeft - OneLeft + OneTotal (constant)  
     
     int maxScore(string s) {
         
         int n=s.size();
         
-        //find all one 
-        int totalOne=0;
-        for(int i=0;i<n;i++){
-            if(s[i]=='1') totalOne++;
-        }
+        int maxScore=INT_MIN;
         
-        int maxsum=INT_MIN;
-        
-        int zero=0;
-        int one=0;
+        int one=0,zero=0;
         
         for(int i=0;i<n-1;i++){
-            if(s[i]=='1') 
-                one++;
-            else
-                zero++;
             
-            int right_one=totalOne-one;
-            maxsum=max(maxsum,zero+right_one);
-                
+            if(s[i]=='1') one++;
+            else zero++;
+            
+            // find score we will (add constant total one at end)
+            maxScore=max(maxScore, zero - one);
         }
-        return maxsum;
+        
+        // we missed one place at s[n-1]  check is it one or zero
+        if(s[n-1]=='1') one++;
+        
+        return maxScore+one;
+        
     }
 };
