@@ -1,25 +1,33 @@
 class Solution {
 public:
+    
+    //two pass approch 
+    //O(N+N)
+    
     int maxScore(string s) {
         
-        //brute force n*n
-        int n =s.size();
+        int n=s.size();
+        
+        //find all one 
+        int totalOne=0;
+        for(int i=0;i<n;i++){
+            if(s[i]=='1') totalOne++;
+        }
         
         int maxsum=INT_MIN;
         
+        int zero=0;
+        int one=0;
+        
         for(int i=0;i<n-1;i++){
+            if(s[i]=='1') 
+                one++;
+            else
+                zero++;
             
-            int zero=0;
-            int one=0;
-            
-            for(int j=0;j<i+1;j++){
-                if(s[j]=='0') zero++;
-            }
-            for(int j=i+1;j<n;j++){
-                if(s[j]=='1') one++;
-            }
-            
-            maxsum=max(maxsum,zero+one);
+            int right_one=totalOne-one;
+            maxsum=max(maxsum,zero+right_one);
+                
         }
         return maxsum;
     }
