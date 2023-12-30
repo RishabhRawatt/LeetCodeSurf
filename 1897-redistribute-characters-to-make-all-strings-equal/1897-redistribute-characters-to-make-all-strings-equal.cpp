@@ -7,14 +7,14 @@ public:
         int n=words.size();
         
         for(int i=0;i<n;i++){
+            string s=words[i];
             
-            for(int j=0;j<words[i].size();j++){
-                freq[words[i][j]]++;
-            }
+            for(auto it :s)
+                freq[it]++;
         }
         
-        for (const auto& pair : freq) {
-        if (pair.second % n != 0) {
+        for (auto it:freq) {
+        if (it.second % n != 0) {
             return false;
             break;
         }
