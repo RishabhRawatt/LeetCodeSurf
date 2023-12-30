@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        unordered_map<char,int>freq;
+        int freq[26]={0};
         
         
         int n=words.size();
@@ -10,17 +10,16 @@ public:
             string s=words[i];
             
             for(char &it :s)
-                freq[it]++;
+                freq[it-'a']++;
         }
         
-        for (auto &it:freq) {
-        if (it.second % n != 0) {
-            return false;
-            break;
-        }
-    }
+        //by stl and lambda function
+        // [&] -- for accessing outside variables
+        auto lambda =[&](int freq){
+            return freq % n==0;
+        };
         
-        return true;
+        return all_of(begin(freq),end(freq),lambda);
         
         
     }
