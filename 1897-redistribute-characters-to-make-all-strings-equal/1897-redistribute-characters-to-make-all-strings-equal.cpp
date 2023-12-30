@@ -9,11 +9,11 @@ public:
         for(int i=0;i<n;i++){
             string s=words[i];
             
-            for(auto it :s)
+            for(char &it :s)
                 freq[it]++;
         }
         
-        for (auto it:freq) {
+        for (auto &it:freq) {
         if (it.second % n != 0) {
             return false;
             break;
