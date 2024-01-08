@@ -16,13 +16,19 @@ public:
         //base case
         if(root==NULL) return;
         
-        // preoreder
-        if(root->val >= low && root->val <= high){
-            sum+=root->val;
+        //insert if valid
+         if (root->val >= low && root->val <= high) {
+            sum += root->val;
         }
         
-        solve(root->left,low,high,sum);
-        solve(root->right,low,high,sum);
+        //if root value lies in side high bound keep traversing
+       if(root->val < high){
+           solve(root->right,low,high,sum);
+       }
+        //same for low bound
+        if(root->val > low){
+            solve(root->left,low,high,sum);
+        }
         
     }
     
