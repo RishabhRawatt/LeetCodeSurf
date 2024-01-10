@@ -64,10 +64,7 @@ public:
         
         while(!q.empty()){
             
-            //this is to check when we traverse we burned atleast 1 node 
-            // int burn=0;
-            
-            
+        
             int size=q.size();
             
             //we need to traverse all nodes at that level then increment time
@@ -79,21 +76,20 @@ public:
             //go left , right , up make sure check in visited to 
                 
             if(currNode->left && !visited[currNode->left]){
-                // burn=1;
+                
                 q.push(currNode->left);
                 visited[currNode->left]=true;
                 
             }
                 
             if(currNode->right && !visited[currNode->right]){
-                // burn=1;
+            
                 q.push(currNode->right);
                 visited[currNode->right]=true;
                 
             } 
                 
             if(parent_map[currNode] && !visited[parent_map[currNode]]){
-                // burn=1;
                 q.push(parent_map[currNode]);
                 visited[parent_map[currNode]]=true;
                 
@@ -101,7 +97,6 @@ public:
             
             }
             
-            // if(burn)currTime++; 
             currTime++;
         }
     
