@@ -1,26 +1,37 @@
 class Solution {
 public:
-    //brute force
-    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
-        int ans=0;
+    //binary
+    bool isValid(vector<int>&arr,int target,int d){
         
-        bool flag;
-        
-        for(int i=0;i<arr1.size();i++){
-            flag=true;
+        int low = 0, high = arr.size() - 1;
+        while(low <= high){
             
-            for(int j=0;j<arr2.size();j++){
-                
-                if(abs(arr1[i]-arr2[j]) <= d)
-                {
-                    flag=false;
-                    break;
-                }
+            int mid = low + (high - low)/2;
+            if(abs(arr[mid] - target) <= d){
+                return false;
+            }
+            else if(arr[mid] < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
             }
             
-            if(flag) ans++;
+        }
+        return true;
+    }
+    
+    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
+        
+        sort(arr2.begin(),arr2.end());
+        
+        int cnt = 0;
+        for(auto num:arr1){
+           if(isValid(arr2,num,d)){
+               cnt++;
+           } 
         }
         
-        return ans;
+        return cnt;
     }
 };
