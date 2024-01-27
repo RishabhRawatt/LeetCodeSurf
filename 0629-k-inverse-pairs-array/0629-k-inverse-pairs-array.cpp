@@ -1,6 +1,9 @@
 class Solution {
 public:
     
+    //T.C  O(k^n) --- recursion
+    //T.C  O(n*k*(n-1)) ---- memeoization
+    
     int MOD=1e9+7;
     int dp[1001][1001];
     //recursive
