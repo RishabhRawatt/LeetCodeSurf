@@ -20,7 +20,7 @@ public:
         }
         
         //O(n*k) -- T.c  -- optimised 
-        //we need only prev k elements
+        //we need only prev n elements
         for(int i = 1; i <= n; i++) {
             long long cumSum = 1;
             for(int j = 1; j <= k; j++) {
