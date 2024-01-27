@@ -14,23 +14,25 @@ public:
         int dp[n+1][k+1];
         memset(dp,0,sizeof(dp));
         
-     
-        
         //same for k=0; put 1
         for(int i=0;i<=n;i++){
             dp[i][0]=1;
         }
         
-        for(int i=1;i<=n;i++){
-            
-            for(int j=1;j<=k;j++){
+        //O(n*k) -- T.c  -- optimised 
+        //we need only prev k elements
+        for(int i = 1; i <= n; i++) {
+            long long cumSum = 1;
+            for(int j = 1; j <= k; j++) {
                 
-                //same memo logic
-                for(int inv=0;inv<=min(j,i-1);inv++){
-                    dp[i][j] = (dp[i][j]%MOD + dp[i-1][j-inv]%MOD) %MOD;
+                cumSum += dp[i-1][j];
+                if(j >= i) {
+                    cumSum -= dp[i-1][j-i];
                 }
+                dp[i][j] = cumSum % MOD;
             }
         }
+        
         return dp[n][k];
         
     }
