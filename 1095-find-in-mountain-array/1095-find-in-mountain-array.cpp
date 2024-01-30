@@ -25,6 +25,7 @@ public:
         while(l<r){
             int mid=l+(r-l)/2;
             
+            
             if(mountainArr.get(mid) < mountainArr.get(mid+1))
                 l=mid+1;
             else
@@ -33,17 +34,19 @@ public:
         return l;
     }
     
+    
     int binarySearch(MountainArray &mountainArr ,int l,int r,int target){
         
-        while(l<r){
+        while(l<=r){
             int mid=l+(r-l)/2;
+            
             
             if(mountainArr.get(mid) == target)
                 return mid;
             else if(mountainArr.get(mid) < target)
                 l=mid+1;
             else
-                r=mid;
+                r=mid-1;
         }
         return -1;
     }
@@ -51,13 +54,14 @@ public:
     
     int reverseBinarySearch(MountainArray &mountainArr, int l,int r,int target){
         
-        while(l<r){
+        while(l<=r){
             int mid=l+(r-l)/2;
+          
             
             if(mountainArr.get(mid)==target)
                 return mid;
             else if(mountainArr.get(mid) < target) // go left
-                r=mid;
+                r=mid-1;
             else 
                 l=mid+1;
         }
@@ -79,7 +83,7 @@ public:
         }
         
         // find in right side(this is in decreasing keep in mind)
-        result_idx=reverseBinarySearch(mountainArr,idx,n,target);
+        result_idx=reverseBinarySearch(mountainArr,idx,n-1,target);
         
         return result_idx;
         
