@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    //t.c O(n)
+    //t.c O(n)+nlog(n)
     long long largestPerimeter(vector<int>& nums) {
         
         sort(nums.begin(),nums.end());
